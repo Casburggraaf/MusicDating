@@ -1,0 +1,49 @@
+<form action="/users/register" method="post">
+  <fieldset>
+    <legend>register</legend>
+    <label for="voornaam">Voornaam:</label>
+    <input type="text" name="voornaam" id="voornaam" value="" /><br>
+
+    <label for="achternaam">Achternaam:</label>
+    <input type="text" name="achternaam" id="achternaam" value="" /><br>
+
+    <label for="geslacht">Geslacht:</label>
+    <input type="radio" name="geslacht" value="man" /> Man
+    <input type="radio" name="geslacht" value="vrouw" /> Vrouw
+    <input type="radio" name="geslacht" value="Geenvanbijde" />Geen van bijde<br>
+
+    <label for="geboortedatum">Geboortedatum:</label>
+    <input type="date" name="geboortedatum" id="geboortedatum" value="" /><br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email"  id="email" value="" /><br>
+
+    <label for="wachtwoord">Wachtwoord:</label>
+    <input type="password" name="wachtwoord" id="wachtwoord" value="" /><br>
+
+    <label for="herwachtwoord">Herhaal wachtwoord:</label>
+    <input type="password" name="herwachtwoord" id="herwachtwoord" value="" /><br>
+
+    <label for="postcode">Postcode:</label>
+    <input type="text" name="postcode" id="postcode" value="" /><br>
+
+    <label for="huisnummer">Huisnummer:</label>
+    <input type="number" name="huisnummer" id="huisnummer" value="" /><br>
+
+    <label for="zoekleeftijdmin">Zoek leftijd:</label>
+    <input type="range" name="zoekleeftijdmin" id="zoekleeftijdmin" min="0" max="100" step="1" value="" /><br>
+
+    <label for="zoekleeftijdmax">Zoek leftijd:</label>
+    <input type="range" name="zoekleeftijdmax" id="zoekleeftijdmax" min="0" max="100" step="1" value="" /><br>
+
+    <label for="zoekgeslacht">Zoek geslacht:</label>
+    <input type="radio" name="zoekgeslacht" value="man" /> Man
+    <input type="radio" name="zoekgeslacht" value="vrouw" /> Vrouw
+    <input type="radio" name="zoekgeslacht" value="bijde" /> Bijde<br>
+
+    <label for="zoekafstand">Zoek afstand:</label>
+    <input type="range" name="zoekafstand" id="zoekafstand" min="10" max="300" step="5" value="" /><br>
+
+    <input type="submit" id="submit" value="Login" /><br>
+  </fieldset>
+</form>

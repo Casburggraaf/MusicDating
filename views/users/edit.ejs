@@ -1,0 +1,65 @@
+<form action="/users/edit" method="post">
+  <fieldset>
+    <legend>Naam veranderen</legend>
+    <label for="voornaam">Voornaam:</label>
+    <input type="text" name="voornaam" id="voornaam" value="" /><br>
+
+    <label for="voornaam">Achternaam:</label>
+    <input type="text" name="achternaam" id="achternaam" value="" /><br>
+  </fieldset>
+  <fieldset>
+    <legend>Geboortedatum veranderen</legend>
+    <label for="geboortedatum">Geboortedatum:</label>
+    <input type="date" name="geboortedatum" id="geboortedatum" value="" /><br>
+  </fieldset>
+  <fieldset>
+    <legend>Email veranderen</legend>
+    <label for="email">Email:</label>
+    <input type="email" name="email" value="" /><br>
+
+    <label for="herhaalemail">Herhaal email:</label>
+    <input type="email" name="herhaalemail" value="" /><br>
+  </fieldset>
+  <fieldset>
+    <legend>Verander huidig wachtwoord</legend>
+    <label for="wachtwoord">Nieuw wachtwoord:</label>
+    <input type="password" name="wachtwoord" id="wachtwoord" value="" /><br>
+
+    <label for="herwachtwoord">Herhaal nieuw wachtwoord:</label>
+    <input type="password" name="herwachtwoord" id="herwachtwoord" value="" /><br>
+  </fieldset>
+  <fieldset>
+    <legend>Verander uw adress</legend>
+    <label for="postcode">Postcode:</label>
+    <input type="text" name="postcode" id="postcode" value="" /><br>
+
+    <label for="huisnummer">Huisnummer:</label>
+    <input type="number" name="huisnummer" id="huisnummer" value="" /><br>
+  </fieldset>
+  <fieldset>
+    <legend>Verander match voorkeuren</legend>
+    <label for="zoekleeftijdmin">Zoek leftijd:</label>
+    <input type="range" name="zoekleeftijdmin" id="zoekleeftijdmin" min="0" max="100" step="1" value="" /><br>
+
+    <label for="zoekleeftijdmax">Zoek leftijd:</label>
+    <input type="range" name="zoekleeftijdmax" id="zoekleeftijdmax" min="0" max="100" step="1" value="" /><br>
+
+    <label for="zoekgeslacht">Zoek geslacht:</label>
+    <input type="radio" name="zoekgeslacht" value="man" /> Man
+    <input type="radio" name="zoekgeslacht" value="vrouw" /> Vrouw
+    <input type="radio" name="zoekgeslacht" value="bijde" /> Bijde<br>
+
+    <label for="zoekafstand">Zoek afstand:</label>
+    <input type="range" name="zoekafstand" id="zoekafstand" min="10" max="300" step="5" value="" /><br>
+  </fieldset>
+  <fieldset>
+    <legend style="text-transform:uppercase">Voor controle voer u huidige wachtwoord in!</legend>
+    <label for="wachtwoord">Wachtwoord:</label>
+    <input type="password" name="huidigwachtwoord" id="huidigwachtwoord" value="" /><br>
+
+    <label for="herhuidigwachtwoord">Herhaal wachtwoord:</label>
+    <input type="password" name="herhuidigwachtwoord" id="herhuidigwachtwoord" value="" /><br>
+
+    <input type="submit" id="submit" value="Edit" /><br>
+  </fieldset>
+</form>
