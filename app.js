@@ -22,6 +22,7 @@ app.set('views', 'views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+
 // Define upload dir
 var upload = multer({dest: 'public/uploads/'});
 // geef de form input name op
@@ -37,7 +38,7 @@ app.use(myConnection(mysql, {
 
 // initialiseer sessies
 app.use(session({
-    secret: "YourSuperSecretStringWithStrangeCharacters#@$!",
+    secret: "YourSuperSecretStringWithStrangeCharacters#@dasf$!",
     resave: false,
     saveUninitialized: true
 }));
@@ -104,14 +105,6 @@ app.post("/users/wachtwoordvergeten", function(req, res){
               res.send("Email en postcode zijn niet geldig.");
           }
         });
-    });
-});
-
-
-
-app.get('/users/logout', function(req, res){
-    req.session.destroy(function(){
-        res.redirect("/");
     });
 });
 
@@ -214,6 +207,50 @@ app.post("/users/edit", function(req, res){
         });
       }
 
+  });
+});
+
+app.get('/users/logout', function(req, res){
+    req.session.destroy(function(){
+        res.redirect("/");
+    });
+});
+
+app.get('/admin', function(req, res) {
+  if (req.session.admin){
+    req.getConnection(function(err, connection){
+      if(err) return next(err);
+      connection.query(`SELECT gebruiker.* FROM gebruiker`, function(err, result) {
+        if(err) return next(err);
+        console.log(result);
+        res.locals.users = result;
+        res.render("admin/index.ejs")
+      });
+    });
+  }else {
+    res.redirect("/admin/login");
+  }
+});
+
+app.get('/admin/login', function(req, res){
+  if (req.session.admin){res.redirect('/');}else {
+    res.render("admin/login");
+  }
+});
+
+app.post('/admin/login', function(req, res){
+  req.getConnection(function(err, connection){
+      if(err) return next(err);
+      console.log(req.body.username, req.body.password);
+      connection.query(`SELECT admin.* FROM admin WHERE gebruikersnaam = "${req.body.username}" AND wachtwoord = "${sha1(req.body.password)}"`, function(err, result) {
+        if(err) return next(err);
+        if(result[0]){
+            req.session.admin = result[0];
+            res.redirect("/admin");
+        } else{
+            res.send("Gebruikersnaam en wachtwoord zijn niet geldig.");
+        }
+      });
   });
 });
 

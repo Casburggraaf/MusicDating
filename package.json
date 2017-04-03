@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "De music datingapp",
   "private": true,
-  "main": "index.js",
+  "main": "app.js",
   "directories": {
     "test": "test"
   },
