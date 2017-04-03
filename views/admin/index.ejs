@@ -1,0 +1,10 @@
+<table>
+  <% for(var i = 0; i < users.length; ++i) {%>
+    <tr>
+      <td><a href="/admin/user=id?<%-i%>"><%=users[i].voornaam%></a></td>
+      <td><%=users[i].achternaam%></td>
+      <td><%=users[i].email%></td>
+      <td><%=users[i].geslacht%></td>
+      <td><%=users[i].postcode%> + <%=users[i].huisnummer%> </td>
+  <%}%></tr>
+</table>
