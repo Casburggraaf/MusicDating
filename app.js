@@ -254,14 +254,14 @@ app.post('/admin/login', function(req, res){
 
 app.get("/admin/remove", function(req, res){
   var user = req.query.id;
-  console.log(req.session.admin);
   req.getConnection(function(err, connection){
 		connection.query(`DELETE FROM gebruiker WHERE id = ${req.query.id}`, function(err,result) {
 			console.log(result);
       res.send("verwijdert.");
-      res.setTimeout(1000, function(){
+      /*res.setTimeout(1000, function(){
         res.redirect("/admin");
       });
+      */
 
 
 		});
