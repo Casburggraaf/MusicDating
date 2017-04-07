@@ -1,10 +1,51 @@
 <table>
-  <% for(var i = 0; i < users.length; ++i) {%>
-    <tr>
-      <td><a href="/admin/user=id?<%-i%>"><%=users[i].voornaam%></a></td>
-      <td><%=users[i].achternaam%></td>
-      <td><%=users[i].email%></td>
-      <td><%=users[i].geslacht%></td>
-      <td><%=users[i].postcode%> + <%=users[i].huisnummer%> </td>
-  <%}%></tr>
+  <tr>
+      <th>
+        Voornaam
+      </th>
+      <th>
+        Achternaam
+      </th>
+      <th>
+        Email adres
+      </th>
+      <th>
+        Geslacht
+      </th>
+      <th>
+        postcode en huisnummer
+      </th>
+      <th>
+        Edit
+      </th>
+      <th>
+        Delete
+      </th>
+    </td>
+  </tr>
+    <% for(var i = 0; i < users.length; ++i) {%>
+        <tr>
+          <td>
+            <%=users[i].voornaam%>
+          </td>
+          <td>
+            <%=users[i].achternaam%>
+          </td>
+          <td>
+            <%=users[i].email%>
+          </td>
+          <td>
+            <%=users[i].geslacht%>
+          </td>
+          <td>
+            <%=users[i].postcode%> +  <%=users[i].huisnummer%>
+          </td>
+          <td>
+            <a href="/admin/edit?id=<%-users[i].ID%>">edit</a>
+          </td>
+          <td>
+            <a href="/admin/remove?id=<%-users[i].ID%>">remove</a>
+          </td>
+        </tr>
+  <%}%>
 </table>

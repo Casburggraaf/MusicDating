@@ -72,7 +72,7 @@ app.post("/users/login", function(req, res){
     req.getConnection(function(err, connection){
         if(err) return next(err);
         connection.query('SELECT gebruiker.* FROM gebruiker WHERE email=? AND wachtwoord=?', [req.body.username, sha1(req.body.password)], function(err, result) {
-          console.log(result[0]);
+          //console.log(result[0]);
           if(result[0]){
               req.session.user = result[0];
               req.session.ingelogd = true;
@@ -96,7 +96,7 @@ app.post("/users/wachtwoordvergeten", function(req, res){
     req.getConnection(function(err, connection){
         if(err) return next(err);
         connection.query('SELECT gebruiker.* FROM gebruiker WHERE email=? AND postcode=?', [req.body.username, req.body.postcodecontrole], function(err, result) {
-          console.log(result);
+          //console.log(result);
           if(result[0]){
               connection.query('UPDATE gebruiker SET wachtwoord=? WHERE email=? AND postcode=?', [sha1(req.body.password), req.body.username, req.body.postcodecontrole], function(err, result) {
                 res.redirect("/");
@@ -135,8 +135,8 @@ app.post("/users/register", function(req, res){
       };
 
       connection.query('INSERT INTO gebruiker set ?', [user], function(err, result) {
-          console.log(user);
-          console.log(err);
+          //console.log(user);
+          //console.log(err);
           res.redirect("/users/login")
       });
   });
@@ -222,9 +222,8 @@ app.get('/admin', function(req, res) {
       if(err) return next(err);
       connection.query(`SELECT gebruiker.* FROM gebruiker`, function(err, result) {
         if(err) return next(err);
-        console.log(result);
         res.locals.users = result;
-        res.render("admin/index.ejs")
+        res.render("admin/index.ejs");
       });
     });
   }else {
@@ -241,7 +240,6 @@ app.get('/admin/login', function(req, res){
 app.post('/admin/login', function(req, res){
   req.getConnection(function(err, connection){
       if(err) return next(err);
-      console.log(req.body.username, req.body.password);
       connection.query(`SELECT admin.* FROM admin WHERE gebruikersnaam = "${req.body.username}" AND wachtwoord = "${sha1(req.body.password)}"`, function(err, result) {
         if(err) return next(err);
         if(result[0]){
@@ -253,6 +251,23 @@ app.post('/admin/login', function(req, res){
       });
   });
 });
+
+app.get("/admin/remove", function(req, res){
+  var user = req.query.id;
+  console.log(req.session.admin);
+  req.getConnection(function(err, connection){
+		connection.query(`DELETE FROM gebruiker WHERE id = ${req.query.id}`, function(err,result) {
+			console.log(result);
+      res.send("verwijdert.");
+      res.setTimeout(1000, function(){
+        res.redirect("/admin");
+      });
+
+
+		});
+	});
+});
+
 
 // Start the server
 app.listen(3000, function(){
