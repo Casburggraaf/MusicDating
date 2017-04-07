@@ -12,11 +12,12 @@ var path = require('path'), // core
 var app = express();
 
 
-// view engine set up
-app.use(express.static('public'))
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.set('views', 'views');
+//view engine set up
+  app.use(express.static('public'))
+  //app.set('views', 'views');
+  app.set('views', path.join(__dirname, 'views'));
+  app.set('view engine', 'ejs');
+
 
 // Define bodyparser (handles POST requests)
 app.use(bodyParser.json());
