@@ -65,7 +65,7 @@ app.get("/home/", function(req, res){
   if(req.session.ingelogd == true){
     req.getConnection(function(err, connection){
         if(err) return next(err);
-        connection.query(`SELECT gebruiker.* FROM gebruiker WHERE (favartist1 = "${req.session.user.favartist1}" OR favartist2 = "${req.session.user.favartist1}" OR favartist3 = "${req.session.user.favartist1}" OR favartist1 = "${req.session.user.favartist2}" OR favartist2 = "${req.session.user.favartist2}" OR favartist3 = "${req.session.user.favartist2}" OR favartist1 = "${req.session.user.favartist3}" OR favartist2 = "${req.session.user.favartist3}" OR favartist3 = "${req.session.user.favartist3}") AND id != ${req.session.user.ID} `, function(err, result) {
+        connection.query(`SELECT gebruiker.* FROM gebruiker WHERE (favartist1 = "${req.session.user.favartist1}" OR favartist2 = "${req.session.user.favartist1}" OR favartist3 = "${req.session.user.favartist1}" OR favartist1 = "${req.session.user.favartist2}" OR favartist2 = "${req.session.user.favartist2}" OR favartist3 = "${req.session.user.favartist2}" OR favartist1 = "${req.session.user.favartist3}" OR favartist2 = "${req.session.user.favartist3}" OR favartist3 = "${req.session.user.favartist3}") AND id != ${req.session.user.ID} AND geslacht = "${req.session.user.zoekgeslacht}" `, function(err, result) {
         //connection.query(`SELECT gebruiker.* FROM gebruiker WHERE (favartist1 = "${req.session.user.favartist1}" OR favartist2 = "${req.session.user.favartist1}" OR favartist3 = "${req.session.user.favartist1}" OR favartist1 = "${req.session.user.favartist2}" OR favartist2 = "${req.session.user.favartist2}" OR favartist3 = "${req.session.user.favartist2}") AND id != ${req.session.user.ID} `, function(err, result) {
           if(err) return next(err);
           //console.log(result);
@@ -287,15 +287,32 @@ app.get("/admin/remove", function(req, res){
 		connection.query(`DELETE FROM gebruiker WHERE id = ${req.query.id}`, function(err,result) {
 			console.log(result);
       res.send("verwijdert.");
-      /*res.setTimeout(1000, function(){
-        res.redirect("/admin");
-      });
-      */
-
-
 		});
 	});
 });
+
+app.get("/api", function(req, res){
+  req.getConnection( function(err, connection){
+    if(err) return next(err);
+    if(req.query.firstname != ""){
+      connection.query( `SELECT gebruiker.voornaam FROM gebruiker WHERE voornaam LIKE   "${req.query.firstname}%"`, function(err, result) {
+        if(result.length>0) {
+          result = result.splice(0,10);
+          result.unshift({status : 'ok'});
+        //  console.log(result);
+          res.json(result);
+        }else {
+          result[0] = {status: "error"};
+          res.json(result);
+        }
+      });
+    }else {
+      var result = [{status: "error"}];
+      res.json(result);
+    }
+  });
+});
+
 
 
 // Start the server

@@ -1,5 +1,11 @@
 <%- include ../partials/head.ejs %>
 <main id="adminIndex">
+<h1>Admin page</h1>
+<input id="input" type="text" autocomplete="off" autocorrect="off" spellcheck="false" value=""/><br>
+<div id="appel"></div>
+<button id="edituser" type="button" class="btn btn-warning">Edit user</button>
+<button id="removeuser" type="button" class="btn btn-danger">Remove user</button><br><br>
+
 <table class="table">
   <tr>
     <th>
@@ -58,4 +64,55 @@
   <%}%>
 </table>
 
+<script type="text/javascript">
+  var JSONHttpRequest = function(url, successHandler, errorHandler) {
+  	var req = new XMLHttpRequest();
+  	req.open('get', url, true);
+  	req.responseType = 'json';
+  	req.onload = function() {
+  		var status = req.status;
+  		if (status == 200) {
+  			successHandler && successHandler(req.response);
+  		} else {
+  			errorHandler && errorHandler(status);
+  		}
+  	};
+  	req.send();
+  };
+
+  var input = document.querySelector("#input");
+  if (input && input.addEventListener) {
+    input.addEventListener("input", function(){
+      var output = document.querySelector("#appel");
+      JSONHttpRequest('/api?firstname='+input.value, function(data) {
+        if(data[0].status == 'ok'){
+          data.shift();
+          let span = "";
+          console.log(data);
+  				while (output.firstChild) output.removeChild(output.firstChild);
+          for(var i = 0; i < data.length; i++){
+            console.log(data[i].firstname);
+  					 let span = document.createElement("div");
+             span.addEventListener("click", function(){
+               console.log(this.innerHTML);
+               document.querySelector("#input").value = this.innerHTML;
+               while (output.firstChild) output.removeChild(output.firstChild);
+             });
+  					 let naam = document.createTextNode(data[i].voornaam);
+  					 span.appendChild(naam);
+  					 output.appendChild(span);
+          }
+        }else {
+  				output.innerHTML = "";
+        }
+      }, function(err) {
+        //erorrrrr
+      });
+    }, false);
+  }
+
+  document.querySelector("#removeuser").addEventListener("click", function(){
+    console.log(document.querySelector("#input").value)
+  })
+</script>
 <%- include ../partials/foot.ejs %>

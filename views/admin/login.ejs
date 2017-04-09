@@ -3,11 +3,22 @@
 <form action="/admin/login" method="post">
   <fieldset>
     <legend>Inloggen</legend>
-    <label for="username">Geberuikersnaam:</label>
-    <input type="text" name="username" id="username" value="" /><br>
-    <label for="password">Wachtwoord:</label>
-    <input type="password" name="password" value="" /><br>
-    <input type="submit" id="submit" value="Login" /><br>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="Username">Geberuikersnaam:</label>
+      <div class="col-sm-6">
+        <input class="form-control" type="text" name="username" id="username" value="" /><br>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="Username">Wachtwoord:</label>
+      <div class="col-sm-6">
+        <input class="form-control" type="password" name="password" id="username" value="" /><br>
+      </div>
+    </div>
+
+    <input type="submit" id="submit"  class="btn btn-primary" value="Login" /><br>
   </fieldset>
 </form>
 
