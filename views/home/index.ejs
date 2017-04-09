@@ -1,0 +1,47 @@
+<%- include ../partials/head.ejs %>
+<main>
+<h3>Hallo <%= user.voornaam %>, Dit zijn jouw matches</h3>
+
+<div class="appel">
+  <% for(var i = 0; i < users.length; ++i) {%>
+
+
+  <% let birthday = +new Date(users[i].geboortedatum);
+      birthday = ~~((Date.now() - birthday) / (31557600000));
+      console.log(birthday)
+
+  %>
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-lg-3 col-sm-3">
+
+            <div class="card hovercard">
+                <div class="cardheader">
+
+                </div>
+                <div class="avatar">
+                    <img alt="" src="<%-users[i].profielfoto%>">
+                </div>
+                <div class="info">
+                    <div class="title">
+                        <a target="_blank" href="http://scripteden.com/"><%= users[i].voornaam %> <%= users[i].achternaam %></a>
+                    </div>
+                    <div class="desc"><%= users[i].favartist1 %>, <%= users[i].favartist2 %>, <%= users[i].favartist3 %></div>
+                    <div class="desc"><%= birthday %> jaar oud</div>
+                    <div class="desc"><%= users[i].geslacht %></div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+	</div>
+</div>
+<%}%>
+</div>
+
+
+<%- include ../partials/foot.ejs %>

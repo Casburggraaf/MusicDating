@@ -1,53 +1,160 @@
-<%- include ../partials/head.ejs %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>De MusicDate</title>
+    <meta charset="utf-8">
+    <link href="/css/main.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-slider/bootstrap-slider.min.css">
+    <script src="../bootstrap-slider/bootstrap-slider.min.js"></script>
+  </head>
+  <body>
+  <main>
 
-<form action="/users/register" method="post">
-  <fieldset>
-    <legend>register</legend>
-    <label for="voornaam">Voornaam:</label>
-    <input type="text" name="voornaam" id="voornaam" value="" /><br>
+<form action="/users/register" method="post" enctype="multipart/form-data">
+  <fieldset class=".form-group">
+    <legend>Register</legend>
 
-    <label for="achternaam">Achternaam:</label>
-    <input type="text" name="achternaam" id="achternaam" value="" /><br>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="voornaam">Voornaam:</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" name="voornaam" id="voornaam" value="" /><br>
+      </div>
+    </div>
 
-    <label for="geslacht">Geslacht:</label>
-    <input type="radio" name="geslacht" value="man" /> Man
-    <input type="radio" name="geslacht" value="vrouw" /> Vrouw
-    <input type="radio" name="geslacht" value="Geenvanbijde" />Geen van bijde<br>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="achternaam">Achternaam:</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" name="achternaam" id="achternaam" value="" /><br>
+      </div>
+    </div>
 
-    <label for="geboortedatum">Geboortedatum:</label>
-    <input type="date" name="geboortedatum" id="geboortedatum" value="" /><br>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label" for="geslacht">Geslacht:
+        <input class="form-check-input" type="radio" name="geslacht" value="man" /> Man
+      </label>
+      <label class="form-check-label" for="geslacht">
+        <input class="form-check-input" type="radio" name="geslacht" value="vrouw" /> Vrouw
+      </label>
+      <label class="form-check-label" for="geslacht">
+        <input class="form-check-input disabled" type="radio" name="geslacht" value="Geenvanbijde" />Geen van bijde
+      </label>
+    </div><br>
 
-    <label for="email">Email:</label>
-    <input type="email" name="email"  id="email" value="" /><br>
+    <div class="form-group">
+    <label for="bs-file">File input</label>
+    <input type="file" name="bs-file" class="form-control-file" id="bs-file" aria-describedby="fileHelp">
+    <small id="fileHelp" class="form-text text-muted">Profiel foto in jpg of png. Bestand grote niet boven de 2MB</small>
+  </div>
 
-    <label for="wachtwoord">Wachtwoord:</label>
-    <input type="password" name="wachtwoord" id="wachtwoord" value="" /><br>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="geboortedatum">Geboortedatum:</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="date" name="geboortedatum" id="geboortedatum" value="" />
+      </div>
+    </div>
 
-    <label for="herwachtwoord">Herhaal wachtwoord:</label>
-    <input type="password" name="herwachtwoord" id="herwachtwoord" value="" /><br>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="email">Email:</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="email" name="email" id="email" value="" /><br>
+      </div>
+    </div>
 
-    <label for="postcode">Postcode:</label>
-    <input type="text" name="postcode" id="postcode" value="" /><br>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="wachtwoord">Wachtwoord:</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="password" name="wachtwoord" id="wachtwoord" value="" /><br>
+      </div>
+    </div>
 
-    <label for="huisnummer">Huisnummer:</label>
-    <input type="number" name="huisnummer" id="huisnummer" value="" /><br>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="herwachtwoord">Herhaal wachtwoord:</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="password" name="herwachtwoord" id="herwachtwoord" value="" /><br>
+      </div>
+    </div>
 
-    <label for="zoekleeftijdmin">Zoek leftijd:</label>
-    <input type="range" name="zoekleeftijdmin" id="zoekleeftijdmin" min="0" max="100" step="1" value="" /><br>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="postcode">Postcode:</label>
+      <div class="col-sm-3">
+        <input class="form-control" type="text" name="postcode" id="postcode" value="" /><br>
+      </div>
+    </div>
 
-    <label for="zoekleeftijdmax">Zoek leftijd:</label>
-    <input type="range" name="zoekleeftijdmax" id="zoekleeftijdmax" min="0" max="100" step="1" value="" /><br>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="huisnummer">Huisnummer:</label>
+      <div class="col-sm-2">
+        <input class="form-control" type="number" name="huisnummer" id="huisnummer" value="" /><br>
+      </div>
+    </div>
 
-    <label for="zoekgeslacht">Zoek geslacht:</label>
-    <input type="radio" name="zoekgeslacht" value="man" /> Man
-    <input type="radio" name="zoekgeslacht" value="vrouw" /> Vrouw
-    <input type="radio" name="zoekgeslacht" value="bijde" /> Bijde<br>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="zoekleeftijdmin">Zoek leftijd Min:</label>
+      <div class="col-sm-6">
+        <input type="range" class="slider" name="zoekleeftijdmin" id="zoekleeftijdmin" min="0" max="100" step="3" value="" />
+      </div>
+    </div>
 
-    <label for="zoekafstand">Zoek afstand:</label>
-    <input type="range" name="zoekafstand" id="zoekafstand" min="10" max="300" step="5" value="" /><br>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="zoekleeftijdmax">Zoek leftijd Max:</label>
+      <div class="col-sm-6">
+        <input type="range" name="zoekleeftijdmax" id="zoekleeftijdmax" min="0" max="100" step="1" value="" /><br>
+      </div>
+    </div>
 
-    <input type="submit" id="submit" value="Login" /><br>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label" for="zoekgeslacht">Zoek geslacht::
+        <input class="form-check-input" type="radio" name="zoekgeslacht" value="man" /> Man
+      </label>
+      <label class="form-check-label" for="geslacht">
+        <input class="form-check-input" type="radio" name="zoekgeslacht" value="vrouw" /> Vrouw
+      </label>
+      <label class="form-check-label" for="geslacht">
+        <input class="form-check-input disabled" type="radio" name="zoekgeslacht" value="Bijde" />Geen van bijde
+      </label>
+    </div><br>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="zoekafstand">Zoek afstand:</label>
+      <div class="col-sm-6">
+        <input type="range" name="zoekafstand" id="zoekafstand" min="0" max="300" step="5" value="" /><br>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="favartiest1">Eerste favoriete artiest</label>
+      <select multiple class="form-control" name="favartiest1" id="favartiest1">
+        <option value="AC/DC">AC/DC</option> <option value="The Beatles">The Beatles</option> <option value="Cash">Cash</option> <option value="Jonny">Jonny</option> <option value="David Bowie">David Bowie</option> <option value="Elvis Presley">Elvis Presley</option> <option value="Fleetwood Mac">Fleetwood Mac</option> <option value="Guns N Roses">Guns N Roses</option> <option value="Heart">Heart</option> <option value="Iggy Pop">Iggy Pop</option> <option value="Jimi Hendrix">Jimi Hendrix</option> <option value="Kraftwerk">Kraftwerk</option> <option value="Led Zeppelin">Led Zeppelin</option> <option value="Metallica">Metallica</option> <option value="Nirvana">Nirvana</option> <option value="Oasis">Oasis</option> <option value="Prince">Prince</option> <option value="Queen">Queen</option> <option  value="Radiohead">Radiohead</option> <option value="Sex Pistols">Sex Pistols</option> <option value="Talking Heads">Talking Heads</option> <option value="U2">U2</option><option value="Velvet Underground">Velvet Underground</option> <option value="The Who">The Who</option> <option value="Yeah Yeah Yeahs">Yeah Yeah Yeahs</option> <option value="Zappa">Zappa</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="favartiest2">Tweede favoriete artiest</label>
+      <select multiple class="form-control" name="favartiest2" id="favartiest2">
+        <option value="AC/DC">AC/DC</option> <option value="The Beatles">The Beatles</option> <option value="Cash">Cash</option> <option value="Jonny">Jonny</option> <option value="David Bowie">David Bowie</option> <option value="Elvis Presley">Elvis Presley</option> <option value="Fleetwood Mac">Fleetwood Mac</option> <option value="Guns N Roses">Guns N Roses</option> <option value="Heart">Heart</option> <option value="Iggy Pop">Iggy Pop</option> <option value="Jimi Hendrix">Jimi Hendrix</option> <option value="Kraftwerk">Kraftwerk</option> <option value="Led Zeppelin">Led Zeppelin</option> <option value="Metallica">Metallica</option> <option value="Nirvana">Nirvana</option> <option value="Oasis">Oasis</option> <option value="Prince">Prince</option> <option value="Queen">Queen</option> <option  value="Radiohead">Radiohead</option> <option value="Sex Pistols">Sex Pistols</option> <option value="Talking Heads">Talking Heads</option> <option value="U2">U2</option><option value="Velvet Underground">Velvet Underground</option> <option value="The Who">The Who</option> <option value="Yeah Yeah Yeahs">Yeah Yeah Yeahs</option> <option value="Zappa">Zappa</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="favartiest3">Eerste favoriete artiest</label>
+      <select multiple class="form-control" name="favartiest3" id="favartiest3">
+        <option value="AC/DC">AC/DC</option> <option value="The Beatles">The Beatles</option> <option value="Cash">Cash</option> <option value="Jonny">Jonny</option> <option value="David Bowie">David Bowie</option> <option value="Elvis Presley">Elvis Presley</option> <option value="Fleetwood Mac">Fleetwood Mac</option> <option value="Guns N Roses">Guns N Roses</option> <option value="Heart">Heart</option> <option value="Iggy Pop">Iggy Pop</option> <option value="Jimi Hendrix">Jimi Hendrix</option> <option value="Kraftwerk">Kraftwerk</option> <option value="Led Zeppelin">Led Zeppelin</option> <option value="Metallica">Metallica</option> <option value="Nirvana">Nirvana</option> <option value="Oasis">Oasis</option> <option value="Prince">Prince</option> <option value="Queen">Queen</option> <option  value="Radiohead">Radiohead</option> <option value="Sex Pistols">Sex Pistols</option> <option value="Talking Heads">Talking Heads</option> <option value="U2">U2</option><option value="Velvet Underground">Velvet Underground</option> <option value="The Who">The Who</option> <option value="Yeah Yeah Yeahs">Yeah Yeah Yeahs</option> <option value="Zappa">Zappa</option>
+      </select>
+    </div>
+
+    <input class="btn btn-primary" type="submit" id="submit" value="Login" /><br>
   </fieldset>
 </form>
 
-<%- include ../partials/foot.ejs %>
+</main>
+<script>
+  // Instantiate a slider
+  var mySlider = $("#zoekleeftijdmin, #zoekleeftijdmax").bootstrapSlider({min:18, max:80});
+  var mySlider2 = $("#zoekafstand").bootstrapSlider({min:10, max:300,step:5});
+</script>
+</body>
+</html>

@@ -1,7 +1,10 @@
 <%- include ../partials/head.ejs %>
-
-<table>
+<main id="adminIndex">
+<table class="table">
   <tr>
+    <th>
+      Profielfoto
+    </th>
       <th>
         Voornaam
       </th>
@@ -27,6 +30,9 @@
   </tr>
     <% for(var i = 0; i < users.length; ++i) {%>
         <tr>
+          <td>
+            <img src="<%-users[i].profielfoto%>" alt="">
+          </td>
           <td>
             <%=users[i].voornaam%>
           </td>

@@ -1,4 +1,4 @@
-// Load modules
+// Load modules mount -t vboxsf datingapp ~/new
 var path = require('path'), // core
     express = require('express'),
     bodyParser = require('body-parser'),
@@ -54,10 +54,29 @@ app.get("/", function(req, res){
 
 
 app.get("/users/", function(req, res){
-    if(req.session.ingelogd != true){
-      res.redirect("/users/login/");
+    if(req.session.ingelogd == true){
+      res.render("users/index");
     } else {
-        res.render("users/index");
+      res.redirect("/users/login/");
+  }
+});
+
+app.get("/home/", function(req, res){
+  if(req.session.ingelogd == true){
+    req.getConnection(function(err, connection){
+        if(err) return next(err);
+        connection.query(`SELECT gebruiker.* FROM gebruiker WHERE (favartist1 = "${req.session.user.favartist1}" OR favartist2 = "${req.session.user.favartist1}" OR favartist3 = "${req.session.user.favartist1}" OR favartist1 = "${req.session.user.favartist2}" OR favartist2 = "${req.session.user.favartist2}" OR favartist3 = "${req.session.user.favartist2}" OR favartist1 = "${req.session.user.favartist3}" OR favartist2 = "${req.session.user.favartist3}" OR favartist3 = "${req.session.user.favartist3}") AND id != ${req.session.user.ID} `, function(err, result) {
+        //connection.query(`SELECT gebruiker.* FROM gebruiker WHERE (favartist1 = "${req.session.user.favartist1}" OR favartist2 = "${req.session.user.favartist1}" OR favartist3 = "${req.session.user.favartist1}" OR favartist1 = "${req.session.user.favartist2}" OR favartist2 = "${req.session.user.favartist2}" OR favartist3 = "${req.session.user.favartist2}") AND id != ${req.session.user.ID} `, function(err, result) {
+          if(err) return next(err);
+          //console.log(result);
+          res.locals.user = req.session.user;
+          res.locals.users = result;
+          res.render("home/index");
+        });
+    });
+
+  } else {
+      res.redirect("/users/login");
   }
 });
 
@@ -65,7 +84,7 @@ app.get("/users/login", function(req, res){
   if(req.session.ingelogd != true){
       res.render("users/login");
   } else {
-      res.redirect("/home/");
+      res.redirect("/home/index");
   }
 });
 
@@ -120,10 +139,16 @@ app.get("/users/register", function(req, res){
 app.post("/users/register", function(req, res){
   req.getConnection(function(err, connection){
       if(err) return next(err);
+      if(req.file !== undefined) {
+        fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err){
+          if(err) return next(err);
+        });
+      }
       var user = {
         voornaam : req.body.voornaam,
         achternaam : req.body.achternaam,
         geslacht : req.body.geslacht,
+        profielfoto: "uploads/" + req.file.originalname,
         geboortedatum : req.body.geboortedatum,
         email : req.body.email,
         wachtwoord : sha1(req.body.wachtwoord),
@@ -132,9 +157,12 @@ app.post("/users/register", function(req, res){
         zoekleeftijdmin :  req.body.zoekleeftijdmin,
         zoekleeftijdmax : req.body.zoekleeftijdmax,
         zoekgeslacht : req.body.zoekgeslacht,
-        zoekafstand : req.body.zoekafstand
+        zoekafstand : req.body.zoekafstand,
+        favartist1: req.body.favartiest1,
+        favartist2: req.body.favartiest2,
+        favartist3: req.body.favartiest3
       };
-
+      console.log(user);
       connection.query('INSERT INTO gebruiker set ?', [user], function(err, result) {
           //console.log(user);
           //console.log(err);
