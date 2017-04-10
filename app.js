@@ -13,10 +13,9 @@ var app = express();
 
 
 //view engine set up
-  app.use(express.static('public'))
-  //app.set('views', 'views');
-  app.set('views', path.join(__dirname, 'views'));
-  app.set('view engine', 'ejs');
+app.use(express.static('public'))
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 
 // Define bodyparser (handles POST requests)
@@ -39,7 +38,7 @@ app.use(myConnection(mysql, {
 
 // initialiseer sessies
 app.use(session({
-    secret: "YourSuperSecretStringWithStrangeCharacters#@dasf$!",
+    secret: "8D%_-!sh.A<Eebz$n:zgU7+jSC=HG!",
     resave: false,
     saveUninitialized: true
 }));
@@ -52,23 +51,14 @@ app.get("/", function(req, res){
   }
 });
 
-
-app.get("/users/", function(req, res){
-    if(req.session.ingelogd == true){
-      res.render("users/index");
-    } else {
-      res.redirect("/users/login/");
-  }
-});
-
 app.get("/home/", function(req, res){
+  console.log(req.session.user);
   if(req.session.ingelogd == true){
     req.getConnection(function(err, connection){
         if(err) return next(err);
         connection.query(`SELECT gebruiker.* FROM gebruiker WHERE (favartist1 = "${req.session.user.favartist1}" OR favartist2 = "${req.session.user.favartist1}" OR favartist3 = "${req.session.user.favartist1}" OR favartist1 = "${req.session.user.favartist2}" OR favartist2 = "${req.session.user.favartist2}" OR favartist3 = "${req.session.user.favartist2}" OR favartist1 = "${req.session.user.favartist3}" OR favartist2 = "${req.session.user.favartist3}" OR favartist3 = "${req.session.user.favartist3}") AND id != ${req.session.user.ID} AND geslacht = "${req.session.user.zoekgeslacht}" `, function(err, result) {
         //connection.query(`SELECT gebruiker.* FROM gebruiker WHERE (favartist1 = "${req.session.user.favartist1}" OR favartist2 = "${req.session.user.favartist1}" OR favartist3 = "${req.session.user.favartist1}" OR favartist1 = "${req.session.user.favartist2}" OR favartist2 = "${req.session.user.favartist2}" OR favartist3 = "${req.session.user.favartist2}") AND id != ${req.session.user.ID} `, function(err, result) {
           if(err) return next(err);
-          //console.log(result);
           res.locals.user = req.session.user;
           res.locals.users = result;
           res.render("home/index");
@@ -80,11 +70,19 @@ app.get("/home/", function(req, res){
   }
 });
 
+app.get("/users/", function(req, res){
+    if(req.session.ingelogd == true){
+      res.render("users/index");
+    } else {
+      res.redirect("/users/login/");
+  }
+});
+
 app.get("/users/login", function(req, res){
   if(req.session.ingelogd != true){
       res.render("users/login");
   } else {
-      res.redirect("/home/index");
+      res.redirect("/home/");
   }
 });
 
@@ -98,7 +96,7 @@ app.post("/users/login", function(req, res){
               req.session.ingelogd = true;
               res.redirect("/");
           } else{
-              res.send("Gebruikersnaam en wachtwoord zijn niet geldig.");
+              res.render("users/wachtwoordverkeerd");
           }
         });
     });
@@ -282,13 +280,26 @@ app.post('/admin/login', function(req, res){
 });
 
 app.get("/admin/remove", function(req, res){
-  var user = req.query.id;
-  req.getConnection(function(err, connection){
-		connection.query(`DELETE FROM gebruiker WHERE id = ${req.query.id}`, function(err,result) {
-			console.log(result);
-      res.send("verwijdert.");
-		});
-	});
+  if (req.session.admin){
+    var user = req.query.id;
+    if(req.query.id){
+      req.getConnection(function(err, connection){
+    		connection.query(`DELETE FROM gebruiker WHERE id = ${req.query.id}`, function(err,result) {
+    			console.log(result);
+          res.locals.user = req.query.id;
+          res.render("admin/verwijderd");
+    		});
+    	});
+    }else if(req.query.voornaam){
+      req.getConnection(function(err, connection){
+    		connection.query(`DELETE FROM gebruiker WHERE voornaam = "${req.query.voornaam}"`, function(err,result) {
+    			console.log(result);
+          res.locals.user = req.query.voornaam;
+          res.render("admin/verwijderd");
+    		});
+    	});
+    }
+  }else {res.redirect("admin/login");  }
 });
 
 app.get("/api", function(req, res){

@@ -1,5 +1,8 @@
+<%- include ../partials/head.ejs %>
+<main>
 <form action="/users/wachtwoordvergeten" method="post">
   <fieldset>
+    <legend>Wachtwoord vergeten</legend>
     <label for="Username">Emailadres:</label>
     <input type="email" name="username" id="username" value="" /><br>
 
@@ -14,3 +17,6 @@
     <input type="submit" id="submit" value="Reset" /><br>
   </fieldset>
 </form>
+</div>
+
+<%- include ../partials/foot.ejs %>

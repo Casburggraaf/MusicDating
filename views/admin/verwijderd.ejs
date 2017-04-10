@@ -1,0 +1,9 @@
+<%- include ../partials/head.ejs %>
+<main>
+  <h1>Dep gebruiker <%= user %> is verwijdert</h1>
+<script type="text/javascript">
+  setTimeout(function () {
+     window.location.href = "/admin"; 
+  }, 2000);
+</script>
+<%- include ../partials/foot.ejs %>

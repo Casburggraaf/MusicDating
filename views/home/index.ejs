@@ -1,15 +1,15 @@
 <%- include ../partials/head.ejs %>
-<main id="appel">
+<main>
 <h3>Hallo <%= user.voornaam %>, Dit zijn jouw matches</h3>
 <div class="row">
 <a href="../users/edit" class="btn btn-primary active col-sm-3" role="button">Profiel aanpassen</a>
-<a href="../users/logout" class="btn btn-default active col-sm-4" role="button">Uiloggen</a>
+<a href="../users/logout" class="btn btn-default active col-sm-2" role="button">Uiloggen</a>
 </div>
 <div class="container">
-
+<div class="row" style="max-width:80%;">
     <% for(var i = 0; i < users.length; ++i) {%>
-      <div class="row">
-		<div class="col-md-4 col-lg-4 col-sm-6 ">
+
+		<div class="col-md-4 col-lg-4 col-sm-5 ">
 
             <div class="card hovercard">
                 <div class="cardheader">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="info">
                     <div class="title">
-                        <a target="_blank" href="http://scripteden.com/"><%= users[i].voornaam %> <%= users[i].achternaam %></a>
+                        <a target="_blank" href=""><%= users[i].voornaam %> <%= users[i].achternaam %></a>
                     </div>
                     <div class="desc"><%= users[i].favartist1 %>, <%= users[i].favartist2 %>, <%= users[i].favartist3 %></div>
                     <div class="desc"><% let birthday = +new Date(users[i].geboortedatum); birthday = ~~((Date.now() - birthday) / (31557600000));%><%= birthday %> jaar oud</div>
@@ -28,8 +28,9 @@
                 </div>
             </div>
         </div>
+          <%}%>
         </div>
-  <%}%>
+
 
 </div>
 

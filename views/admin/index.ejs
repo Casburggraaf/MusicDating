@@ -112,7 +112,9 @@
   }
 
   document.querySelector("#removeuser").addEventListener("click", function(){
-    console.log(document.querySelector("#input").value)
+    let tempinput = document.querySelector("#input").value;
+
+    window.location.replace(`/admin/remove?voornaam=${tempinput}`);
   })
 </script>
 <%- include ../partials/foot.ejs %>

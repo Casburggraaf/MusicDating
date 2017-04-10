@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>De MusicDate</title>
-    <meta charset="utf-8">
-    <link href="/css/main.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../bootstrap-slider/bootstrap-slider.min.css">
-    <script src="../bootstrap-slider/bootstrap-slider.min.js"></script>
-  </head>
-  <body>
-  <main>
-
+<%- include ../partials/head.ejs %>
+<main>
 <form action="/users/register" method="post" enctype="multipart/form-data">
   <fieldset class=".form-group">
     <legend>Register</legend>
@@ -151,6 +137,10 @@
 </form>
 
 </main>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../bootstrap-slider/bootstrap-slider.min.css">
+<script src="../bootstrap-slider/bootstrap-slider.min.js"></script>
 <script>
   // Instantiate a slider
   var mySlider = $("#zoekleeftijdmin, #zoekleeftijdmax").bootstrapSlider({min:18, max:80});
