@@ -7,14 +7,14 @@
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="voornaam">Voornaam:</label>
       <div class="col-sm-9">
-        <input class="form-control" type="text" name="voornaam" id="voornaam" value="" /><br>
+        <input class="form-control" type="text" name="voornaam" id="voornaam" value="" required/><br>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="achternaam">Achternaam:</label>
       <div class="col-sm-9">
-        <input class="form-control" type="text" name="achternaam" id="achternaam" value="" /><br>
+        <input class="form-control" type="text" name="achternaam" id="achternaam" value="" required/><br>
       </div>
     </div>
 
@@ -32,49 +32,49 @@
 
     <div class="form-group">
     <label for="bs-file">File input</label>
-    <input type="file" name="bs-file" class="form-control-file" id="bs-file" aria-describedby="fileHelp">
+    <input type="file" name="bs-file" class="form-control-file" id="bs-file" aria-describedby="fileHelp" required>
     <small id="fileHelp" class="form-text text-muted">Profiel foto in jpg of png. Bestand grote niet boven de 2MB</small>
   </div>
 
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="geboortedatum">Geboortedatum:</label>
       <div class="col-sm-9">
-        <input class="form-control" type="date" name="geboortedatum" id="geboortedatum" value="" />
+        <input class="form-control" type="date" name="geboortedatum" id="geboortedatum" value="" placeholder="YYYY-MM-DD" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="email">Email:</label>
       <div class="col-sm-9">
-        <input class="form-control" type="email" name="email" id="email" value="" /><br>
+        <input class="form-control" type="email" name="email" id="email" value="" required/><br>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="wachtwoord">Wachtwoord:</label>
       <div class="col-sm-9">
-        <input class="form-control" type="password" name="wachtwoord" id="wachtwoord" value="" /><br>
+        <input class="form-control" type="password" name="wachtwoord" id="wachtwoord" value="" required/><br>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="herwachtwoord">Herhaal wachtwoord:</label>
       <div class="col-sm-9">
-        <input class="form-control" type="password" name="herwachtwoord" id="herwachtwoord" value="" /><br>
+        <input class="form-control" type="password" name="herwachtwoord" id="herwachtwoord" value="" required/><br>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="postcode">Postcode:</label>
       <div class="col-sm-3">
-        <input class="form-control" type="text" name="postcode" id="postcode" value="" /><br>
+        <input class="form-control" type="number" name="postcode" id="postcode" value="" required/><br>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="huisnummer">Huisnummer:</label>
       <div class="col-sm-2">
-        <input class="form-control" type="number" name="huisnummer" id="huisnummer" value="" /><br>
+        <input class="form-control" type="number" name="huisnummer" id="huisnummer" value="" required/><br>
       </div>
     </div>
 
