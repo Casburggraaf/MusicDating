@@ -14,9 +14,7 @@ body {
   background-image: -webkit-linear-gradient(top left, #159957 0%, #155799 100%);
   background-image: -o-linear-gradient(top left, #159957 0%, #155799 100%);
   background-image: linear-gradient(to bottom right, #159957 0%, #155799 100%);
-  display: flex;
-  justify-content: center;
-	flex-direction: column;
+
 }
 
 main {
