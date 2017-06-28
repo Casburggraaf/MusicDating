@@ -2,7 +2,7 @@
 <main>
 <h3>Hallo <%= user.voornaam %>, Dit is jouw chat met <%= match.voornaam %></h3>
 <div class="container">
-  <div class="row chatIamge" style="max-width:80%;">
+  <div class="row chatIamge" style="max-width:70%;">
     <div class="col-md-4 col-lg-4 col-sm-5 ">
       <div class="card hovercard">
         <div class="cardheader">
@@ -24,16 +24,16 @@
 </div>
 <% for(var i = 0; i < chats.length; ++i) { %>
   <% if(chats[i].verzenderID == user.ID){ %>
-    <div class="chatBoble ">
-      <img alt="" src="<%-user.profielfoto%>">
-
+    <div class="chatBoble profiel">
       <%=chats[i].bericht%>
+      <img alt="" src="<%-user.profielfoto%>">
     </div>
   <%}else {%>
-    <div class="chatBoble ">
+    <div class="chatBoble match">
       <img alt="" src="<%-match.profielfoto%>">
 
       <%=chats[i].bericht%>
+    </div>
   <%}%>
 <%}%>
 <br>
