@@ -39,7 +39,8 @@ app.use(myConnection(mysql, {
   user: 'student',
   password: 'serverSide',
   port: 3306,
-  database: 'datingapp'
+  database: 'datingapp',
+  multipleStatements: true
 }, 'single'));
 
 // initialiseer sessies
@@ -62,8 +63,6 @@ app.use('/home', homeRouter);
 app.use('/users', usersRouter);
 
 app.use('/admin', adminRouter);
-
-});
 
 app.get("/api", function(req, res){
   req.getConnection( function(err, connection){

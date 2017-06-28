@@ -1,0 +1,50 @@
+<%- include ../partials/head.ejs %>
+<main>
+<h3>Hallo <%= user.voornaam %>, Dit is jouw chat met <%= match.voornaam %></h3>
+<div class="container">
+  <div class="row chatIamge" style="max-width:70%;">
+    <div class="col-md-4 col-lg-4 col-sm-5 ">
+      <div class="card hovercard">
+        <div class="cardheader">
+        </div>
+        <div class="avatar">
+          <img alt="" src="<%-match.profielfoto%>">
+        </div>
+        <div class="info">
+          <div class="title">
+            <a href="chat?id=<%-match.ID%>" href=""><%= match.voornaam %> <%= match.achternaam %></a>
+          </div>
+          <div class="desc"><%= match.favartist1 %>, <%= match.favartist2 %>, <%= match.favartist3 %></div>
+          <div class="desc"><% let birthday = +new Date(match.geboortedatum); birthday = ~~((Date.now() - birthday) / (31557600000));%><%= birthday %> jaar oud</div>
+          <div class="desc"><%= match.geslacht %></div>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+<% for(var i = 0; i < chats.length; ++i) { %>
+  <% if(chats[i].verzenderID == user.ID){ %>
+    <div class="chatBoble profiel">
+      <%=chats[i].bericht%>
+      <img alt="" src="<%-user.profielfoto%>">
+    </div>
+  <%}else {%>
+    <div class="chatBoble match">
+      <img alt="" src="<%-match.profielfoto%>">
+
+      <%=chats[i].bericht%>
+    </div>
+  <%}%>
+<%}%>
+<br>
+<form action="chat" method="post">
+<fieldset>
+  <div class="form-group row">
+    <label class="col-sm-1 col-form-label" for="bericht">Bericht:</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" name="bericht" id="bericht" value="" />
+    </div>
+    <input type="submit" class="col-sm-1 btn btn-primary" id="submit" value="verstuur" />
+  </div>
+</fieldset>
+<%- include ../partials/foot.ejs %>

@@ -134,38 +134,38 @@ router.post("/edit", function(req, res){
 
       if(user.voornaam != "" && user.achternaam){
         connection.query('UPDATE gebruiker SET voornaam=?, achternaam=? WHERE ID=? AND wachtwoord=?', [user.voornaam, user.achternaam, req.session.user.ID, user.huidigwachtwoord], function(err, result) {
-          res.render("users/");
+          res.redirect("users/");
         });
       }
 
       if(user.geboortedatum != ""){
         connection.query('UPDATE gebruiker SET geboortedatum=? WHERE ID=? AND wachtwoord=?', [user.geboortedatum, req.session.user.ID, user.huidigwachtwoord], function(err, result) {
-          res.render("users/");
+          res.redirect("users/");
         });
       }
 
 
       if(user.email != ""){
         connection.query('UPDATE gebruiker SET email=? WHERE ID=? AND wachtwoord=?', [user.email, req.session.user.ID, user.huidigwachtwoord], function(err, result) {
-          res.render("users/");
+          res.redirect("users/");
         });
       }
 
       if(user.wachtwoord != ""){
         connection.query('UPDATE gebruiker SET email=? WHERE ID=? AND wachtwoord=?', [user.wachtwoord, req.session.user.ID, user.huidigwachtwoord], function(err, result) {
-          res.render("users/");
+          res.redirect("users/");
         });
       }
 
       if(user.postcode != "" && user.huisnummer){
         connection.query('UPDATE gebruiker SET postcode=?, huisnummer=? WHERE ID=? AND wachtwoord=?', [user.postcode, user.huisnummer, req.session.user.ID, user.huidigwachtwoord], function(err, result) {
-          res.render("users/");
+          res.redirect("users/");
         });
       }
 
       if(user.zoekleeftijdmin != "" && user.zoekleeftijdmax && user.zoekgeslacht && user.zoekafstand){
         connection.query('UPDATE gebruiker SET zoekleeftijdmin=?, zoekleeftijdmax=?, zoekgeslacht=?, zoekafstand=? WHERE ID=? AND wachtwoord=?', [user.zoekleeftijdmin, user.zoekleeftijdmax, user.zoekgeslacht, user.zoekafstand, req.session.user.ID, user.huidigwachtwoord], function(err, result) {
-          res.render("users/");
+          res.redirect("users/");
         });
       }
 
