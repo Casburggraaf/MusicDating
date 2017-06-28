@@ -20,7 +20,7 @@
                 </div>
                 <div class="info">
                     <div class="title">
-                        <a target="_blank" href=""><%= users[i].voornaam %> <%= users[i].achternaam %></a>
+                        <a href="chat?id=<%-users[i].ID%>" href=""><%= users[i].voornaam %> <%= users[i].achternaam %></a>
                     </div>
                     <div class="desc"><%= users[i].favartist1 %>, <%= users[i].favartist2 %>, <%= users[i].favartist3 %></div>
                     <div class="desc"><% let birthday = +new Date(users[i].geboortedatum); birthday = ~~((Date.now() - birthday) / (31557600000));%><%= birthday %> jaar oud</div>

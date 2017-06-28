@@ -30,7 +30,9 @@ main {
 
 }
 
-#adminIndex ta
+#adminIndex td img {
+  max-width: 20vw;
+}
 
 h1 {
   text-align: center;
