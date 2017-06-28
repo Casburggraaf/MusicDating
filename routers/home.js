@@ -21,6 +21,23 @@ router.get("/", function(req, res){
   }
 });
 
+router.get("/chats", function(req, res){
+  if(req.session.ingelogd == true){
+    req.getConnection(function(err, connection){
+      if(err) return next(err);
+      connection.query(`SELECT chats.* FROM chats WHERE (verzenderID=${req.session.user.ID} OR ontvangerID=${req.session.user.ID})`, function(err, result) {
+        console.log(result);
+        console.log(err);
+        res.locals.user = req.session.user;
+        res.locals.users = result;
+        res.render("home/chats");
+      });
+    });
+  } else {
+      res.redirect("/users/login");
+  }
+});
+
 router.get("/chat", function(req, res){
   if(req.session.ingelogd == true){
     req.getConnection(function(err, connection){
