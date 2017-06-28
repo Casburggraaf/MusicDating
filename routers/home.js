@@ -38,4 +38,19 @@ router.get("/chat", function(req, res){
 });
 
 
+router.post("/chat", function(req, res){
+  var ontvangerID = req.header('Referer');
+  var ontvangerID = ontvangerID.split("=").slice(-1)[0];
+  console.log(req.query.id);
+  console.log(ontvangerID);
+  console.log(req.body.bericht);
+  console.log(req.session.user.ID);
+  req.getConnection(function(err, connection){
+    if(err) return next(err);
+    connection.query(`INSERT INTO chats (verzenderID, ontvangerID, bericht) VALUES ('${req.session.user.ID}', '${ontvangerID}', '${req.body.bericht}')`, function(err, result) {
+      console.log(err, result);
+      res.redirect("/");
+    });
+  });
+});
 module.exports = router;

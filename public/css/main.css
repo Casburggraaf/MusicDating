@@ -30,6 +30,11 @@ main {
 
 }
 
+.chatIamge {
+  left: -50%;
+  transform: translateX(50%);
+}
+
 #adminIndex td img {
   max-width: 20vw;
 }

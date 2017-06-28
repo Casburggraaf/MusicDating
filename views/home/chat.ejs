@@ -2,7 +2,7 @@
 <main>
 <h3>Hallo <%= user.voornaam %>, Dit is jouw chat met <%= match.voornaam %></h3>
 <div class="container">
-  <div class="row" style="max-width:80%;">
+  <div class="row chatIamge" style="max-width:80%;">
     <div class="col-md-4 col-lg-4 col-sm-5 ">
       <div class="card hovercard">
         <div class="cardheader">
@@ -22,10 +22,29 @@
     </div>
   </div>
 </div>
-<div>
-<% for(var i = 0; i < chats.length; ++i) {%>
-  <%=chats[i].bericht%><br>
-<%}%>
-</div>
+<% for(var i = 0; i < chats.length; ++i) { %>
+  <% if(chats[i].verzenderID == user.ID){ %>
+    <div class="chatBoble ">
+      <img alt="" src="<%-user.profielfoto%>">
 
+      <%=chats[i].bericht%>
+    </div>
+  <%}else {%>
+    <div class="chatBoble ">
+      <img alt="" src="<%-match.profielfoto%>">
+
+      <%=chats[i].bericht%>
+  <%}%>
+<%}%>
+<br>
+<form action="chat" method="post">
+<fieldset>
+  <div class="form-group row">
+    <label class="col-sm-1 col-form-label" for="bericht">Bericht:</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" name="bericht" id="bericht" value="" />
+    </div>
+    <input type="submit" class="col-sm-1 btn btn-primary" id="submit" value="verstuur" />
+  </div>
+</fieldset>
 <%- include ../partials/foot.ejs %>
