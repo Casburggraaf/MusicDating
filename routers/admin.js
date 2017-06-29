@@ -45,7 +45,7 @@ router.get("/remove", function(req, res){
     var user = req.query.id;
     if(req.query.id){
       req.getConnection(function(err, connection){
-    		connection.query(`DELETE FROM gebruiker WHERE id = ${req.query.id}`, function(err,result) {
+    		connection.query(`DELETE FROM chats WHERE verzenderID = ${req.query.id} OR ontvangerID = ${req.query.id}; DELETE FROM gebruiker WHERE id = ${req.query.id}`, function(err,result) {
     			console.log(result);
           res.locals.user = req.query.id;
           res.render("admin/verwijderd");
@@ -62,4 +62,5 @@ router.get("/remove", function(req, res){
     }
   }else {res.redirect("admin/login");  }
 });
+
 module.exports = router;

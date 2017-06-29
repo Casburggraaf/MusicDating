@@ -179,4 +179,15 @@ router.get('/logout', function(req, res){
 });
 
 
+router.get("/remove", function(req, res){
+  console.log(req.session.user.ID);
+  req.getConnection(function(err, connection){
+    connection.query(`DELETE FROM chats WHERE verzenderID = ${req.session.user.ID} OR ontvangerID = ${req.session.user.ID}; DELETE FROM gebruiker WHERE ID = ${req.session.user.ID}`, function(err,result) {
+      req.session.destroy(function(){
+          res.redirect("/");
+      });
+    });
+  });
+});
+
 module.exports = router;
